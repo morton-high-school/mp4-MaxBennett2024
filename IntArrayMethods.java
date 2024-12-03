@@ -33,7 +33,11 @@ public class IntArrayMethods {
     }
     public static boolean[] arrayLocalMin(int[] a){
         boolean[] myList = new boolean[a.length];
-        myList[0] = false;
+        if(a[0]<a[1]){
+            myList[0] = true;
+        }else{
+            myList[0] = false;
+        }
         for(int i =1;i<a.length-1;i++){
             if((a[i]<a[i-1])&&(a[i]<a[i+1])){
                 myList[i]=true;
@@ -41,12 +45,20 @@ public class IntArrayMethods {
                 myList[i]=false;
             }
         }
-        myList[a.length-1] = false;
+        if(a[a.length-1]>a[a.length-2]){
+            myList[a.length-1] = false;
+        }else{
+            myList[a.length-1] = true;
+        }
         return myList;
     }
     public static boolean[] arrayLocalMax(int[] a){
         boolean[] myList = new boolean[a.length];
-        myList[0] = false;
+        if(a[0]>a[1]){
+            myList[0] = true;
+        }else{
+            myList[0] = false;
+        }
         for(int i =1;i<a.length-1;i++){
             if(a[i]>a[i-1]&&a[i]>a[i+1]){
                 myList[i]=true;
@@ -54,7 +66,11 @@ public class IntArrayMethods {
                 myList[i]=false;
             }
         }
-        myList[a.length-1] = false;
+        if(a[a.length-1]<a[a.length-2]){
+            myList[a.length-1] = false;
+        }else{
+            myList[a.length-1] = true;
+        }
         return myList;
     }
     public static int arrayMode(int[] a ){
@@ -62,6 +78,7 @@ public class IntArrayMethods {
         int bestCount=0;
         int mode = a[0];
         for(int i =0;i<a.length;i++){
+            count = 0;
             for(int j=0;j<a.length;j++){
                 if(a[i]==a[j]){
                     count++;
@@ -111,25 +128,26 @@ public class IntArrayMethods {
             average[i] = a[i];
         }
         for(int i =b;i<a.length;i++){
-            
         }
         return average;
     }
     public static int[] arrayShift(int[] a, int b){
-        for(int i =0;i<a.length;i++){
-           if(i+b<a.length){
-            a[i+b]=a[i];
-        }else{
-            a[a.length-i-1]=a[i];
+        int[] shiftedList = new int[a.length];
+        for(int i = 0;i<shiftedList.length;i++){
+            if(i-b<0){
+                shiftedList[i] = a[a.length-b+i];
+            }else{
+                shiftedList[i] = a[i-b];
+            }
         }
-        }
-        return a;
+        return shiftedList;
     }
     public static int[] arrayReverse(int[] a){
         int[] result = new int[a.length];
         int count = 0;
         for(int i =a.length-1;i>=0;i--){
             result[count] = a[i];
+            count++;
         }
         return result;
     }
