@@ -124,6 +124,22 @@ public class IntArrayMethods {
     }
     public static double[] arrayRollingAverage(int[] a, int b){
         double[] average = new double[a.length];
+        double sum = 0;
+        double avg;
+        int count =1;
+        for(int i =0;i<a.length;i++){
+            sum+=a[i];
+            if(count>b){
+                sum-= a[i-b];
+            }
+            avg = sum/b;
+            if(count<b){
+                avg = sum/count;
+            }
+            average[i] = avg;
+            count++;
+        }
+        average[0] = a[0];
         return average;
     }
     public static int[] arrayShift(int[] a, int b){
